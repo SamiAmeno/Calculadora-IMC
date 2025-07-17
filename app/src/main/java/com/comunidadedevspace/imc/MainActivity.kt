@@ -1,5 +1,6 @@
 package com.comunidadedevspace.imc
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -18,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         // Colocar a acao no Botao (setOnClickListener)
         // O setOnClickListener serve para dar o CLIQUE para o botão
         // Recuperar o texto digitado na View e colocar ela para ser ultilizada (Text)
-        // O findViewById serve para instanciar as Views e para manipular-las. Se tem uma View de Botão esse comando faz com que o usuario possa clicar tendo resultado, e se tiver qualquer outra View esse comando faz com que ela funcione perfeitamente.
+        // O findViewById serve para instanciar os Dados, (Views e etc) e para manipular-las. Se tem uma View de Botão esse comando faz com que o usuario possa clicar tendo resultado, e se tiver qualquer outra View esse comando faz com que ela funcione perfeitamente.
 
         val edtPeso = findViewById<TextInputEditText>(R.id.edit_peso)
         val edtAltura = findViewById<TextInputEditText>(R.id.edit_altura)
@@ -43,8 +44,20 @@ class MainActivity : AppCompatActivity() {
                 val peso = pesoStr.toFloat()
                 val altura = alturaStr.toFloat()
 
-                val Imc = peso / (altura * altura)
-                println("Seu Imc =" + Imc)
+                val resultadoImc = peso / (altura * altura)
+
+
+                //Navegar para a proxima tela
+                //Criar o layout da proxima tela
+                // Passar dados (Resultado) para a proxima tela
+
+                val intent = Intent(this, ResultActivity::class.java)
+
+                // entre o start e o comando Intente tem os Dados que voce quer passar
+                intent.putExtra(Chave_Result, resultadoImc)
+                startActivity(intent)
+
+                println("Seu Imc =" + resultadoImc)
             }
         }
     }
